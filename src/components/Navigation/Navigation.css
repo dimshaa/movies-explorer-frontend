@@ -1,0 +1,69 @@
+.navigation {
+  margin-left: 44px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.navigation_unauthorized {
+  justify-content: flex-end;
+}
+
+.navigation__links-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navigation__links-list_unauthorized {
+  gap: 30px;
+}
+
+.navigation__link {
+  text-decoration: none;
+  color: var(--font-color-main);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.38;
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__link_type_signin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 32px;
+  background: #3456F3 center;
+  border-radius: 3px;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.navigation__link_type_signup {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.navigation__profile-edit {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.navigation__profile-pic {
+  width: 26px;
+  height: 30px;
+  border-radius: 4px;
+  background: #F4F4F4 url("../../images/userpic.svg") center no-repeat;
+}
