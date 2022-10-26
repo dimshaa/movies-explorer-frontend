@@ -1,0 +1,29 @@
+.promo {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 50px 70px 60px;
+  background-color: #DDDEE3;
+}
+
+.promo__heading {
+  margin: 0;
+  margin-bottom: 102px;
+  max-width: 600px;
+  align-self: flex-start;
+  text-align: left;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.3;
+  letter-spacing: -0.04;
+}
+
+.promo__hero {
+  width: 722px;
+  height: 244px;
+  align-self: flex-end;
+  background: url('../../images/hero-image.svg') no-repeat center;
+}
