@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FilterCheckbox from '../FliterCheckox/FilterCheckbox';
 import './SearchForm.css';
 
 function SearchForm() {
@@ -36,6 +37,7 @@ function SearchForm() {
           Найти
         </button>
       </form>
+      <FilterCheckbox />
     </section>
   );
 };
