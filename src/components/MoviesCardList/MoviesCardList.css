@@ -2,12 +2,15 @@
   width: 100%;
   box-sizing: border-box;
   padding: 70px 70px 0;
+  margin: 0 auto;
+  display: block;
 }
 
 .cards-list {
-  margin: 0;
+  /* width: 1080px; */
+  margin: 0 auto;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 38px 20px;
 }

@@ -16,7 +16,7 @@ const cards = [
   title: '33 слова о дизайне',
   src: img,
   duration: '1ч 42м',
-  isSaved: true
+  isSaved: false
 },
 {
   id: 3,
@@ -58,21 +58,21 @@ const cards = [
   title: '33 слова о дизайне',
   src: img,
   duration: '1ч 42м',
-  isSaved: true
+  isSaved: false
 },
 {
   id: 9,
   title: '33 слова о дизайне',
   src: img,
   duration: '1ч 42м',
-  isSaved: true
+  isSaved: false
 },
 {
   id: 10,
   title: '33 слова о дизайне',
   src: img,
   duration: '1ч 42м',
-  isSaved: true
+  isSaved: false
 },
 {
   id: 11,
@@ -86,7 +86,7 @@ const cards = [
   title: '33 слова о дизайне',
   src: img,
   duration: '1ч 42м',
-  isSaved: true
+  isSaved: false
 },
 {
   id: 13,
