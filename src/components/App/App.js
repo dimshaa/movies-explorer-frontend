@@ -5,7 +5,8 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import { movieCards } from '../../utils/constants';
+import Profile from '../Profile/Profile';
+import { currentUser, movieCards } from '../../utils/constants';
 
 
 function App({ loggedIn }) {
@@ -18,6 +19,9 @@ function App({ loggedIn }) {
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies cards={movieCards.filter(card => card.isSaved)} />
+        </Route>
+        <Route path='/profile'>
+          <Profile user={currentUser} />
         </Route>
         <Route exact path='/'>
           <Main />

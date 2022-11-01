@@ -113,4 +113,9 @@ export const movieCards = [
     duration: '1ч 42м',
     isSaved: false
   }
-]
+];
+
+export const currentUser = {
+  name: 'Дима',
+  email: 'email@email.ru'
+}
