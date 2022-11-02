@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
 import { currentUser, movieCards } from '../../utils/constants';
 
 
@@ -22,6 +23,9 @@ function App({ loggedIn }) {
         </Route>
         <Route path='/profile'>
           <Profile user={currentUser} />
+        </Route>
+        <Route path='/signup'>
+          <Register />
         </Route>
         <Route exact path='/'>
           <Main />
