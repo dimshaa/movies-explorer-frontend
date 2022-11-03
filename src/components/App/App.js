@@ -9,6 +9,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import { currentUser, movieCards } from '../../utils/constants';
+import NotFound from '../NotFound/NotFound';
 
 
 function App({ loggedIn }) {
@@ -33,6 +34,9 @@ function App({ loggedIn }) {
         </Route>
         <Route exact path='/'>
           <Main />
+        </Route>
+        <Route path='*'>
+          <NotFound />
         </Route>
       </Switch>
       <Footer />
