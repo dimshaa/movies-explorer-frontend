@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FilterCheckbox from '../FliterCheckox/FilterCheckbox';
+import FilterCheckbox from '../FliterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 function SearchForm() {
