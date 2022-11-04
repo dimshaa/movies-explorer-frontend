@@ -7,6 +7,12 @@ function Movies({ cards }) {
     <main className='movies'>
       <SearchForm />
       <MoviesCardList cards={cards} />
+      <button
+        className='movie__more-btn'
+        type='button'
+      >
+        Ещё
+      </button>
     </main>
   );
 };

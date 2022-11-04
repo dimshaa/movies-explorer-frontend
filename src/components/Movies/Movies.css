@@ -3,3 +3,17 @@
   max-width: 1280px;
   padding: 70px 0 80px;
 }
+
+.movie__more-btn {
+  margin: 50px auto 80px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  width: 320px;
+  height: 36px;
+  background-color: #F4F4F4;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.21;
+  font-weight: 500;
+}
