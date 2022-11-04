@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
@@ -10,6 +11,7 @@ function Header({ loggedIn }) {
         <img src={logo} className="logo" alt="логотип" />
       </Link>
       <Navigation loggedIn={loggedIn} />
+      {loggedIn && <BurgerMenu />}
     </header>
   );
 };

@@ -16,7 +16,7 @@
   padding: 19px 70px;
   display: flex;
   justify-content: space-between;
-  /* gap: 44px; */
+  position: relative;
   align-items: center;
 }
 

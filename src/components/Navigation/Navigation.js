@@ -5,7 +5,7 @@ function Navigation({ loggedIn }) {
   return (
     loggedIn ? (
       <nav className="navigation">
-        <ul className="navigation__links-list">
+        <ul className="navigation__links-list navigation__links-list_switchable">
           <li>
             <NavLink to="movies" className="navigation__link" activeClassName="navigation__link_active">
               Фильмы
