@@ -23,3 +23,14 @@
 .movie__more-btn:hover {
   opacity: .7;
 }
+
+@media screen and (max-width: 550px) {
+  .movies {
+    padding-top: 81px;
+    padding-bottom: 0;
+  }
+
+  .movie__more-btn {
+    width: 240px;
+  }
+}

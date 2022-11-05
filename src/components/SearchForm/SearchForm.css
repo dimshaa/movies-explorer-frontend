@@ -24,7 +24,7 @@
   border: none;
   font-size: 28px;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.21;
 }
 
 .search__input::placeholder {
@@ -36,11 +36,12 @@
 }
 
 .search__submit-btn {
+  display: block;
   margin: 0;
   padding: 0;
   border: none;
   border-radius: 48px;
-  width: 59px;
+  width: 66px;
   height: 34px;
   background-color: #3456F3;
   text-align: center;
@@ -60,5 +61,19 @@
   .search {
     padding-left: 30px;
     padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .search {
+    padding: 0 14px;
+  }
+
+  .search__form {
+    padding-bottom: 9px;
+  }
+
+  .search__input {
+    font-size: 18px;
   }
 }
