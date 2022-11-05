@@ -33,7 +33,6 @@
 .profile__label {
   display: flex;
   text-align: left;
-  /* word-wrap: normal; */
   hyphens: none;
   margin-bottom: 17px;
   padding-bottom: 16px;
@@ -133,5 +132,25 @@
 @media screen and (max-width: 850px) {
   .profile {
     margin: auto;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profile__title {
+    margin-bottom: 80px;
+  }
+
+  .profile__edit-btn {
+    font-size: 12px;
+  }
+
+  .profile__logout {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile__form {
+    max-width: 260px;
   }
 }

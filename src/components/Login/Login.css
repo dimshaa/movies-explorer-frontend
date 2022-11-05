@@ -4,6 +4,8 @@
   min-width: 396px;
   margin: 0 auto;
   padding: 70px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo-link {
@@ -125,5 +127,29 @@
 @media screen and (max-width: 850px) {
   .login {
     margin: auto;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .login {
+    align-items: center;
+    min-width: 260px;
+  }
+
+  .login__title {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .login__fieldset {
+    margin-top: 80px;
+  }
+
+  .login__submit-btn {
+    font-size: 12px;
+  }
+
+  .login__tooltip {
+    font-size: 12px;
   }
 }
