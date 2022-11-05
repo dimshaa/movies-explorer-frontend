@@ -117,6 +117,11 @@
   opacity: .7;
 }
 
+.profile__submit-btn_disabled {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+}
+
 .profile__error-message {
   margin-bottom: 20px;
   color: #EE3465;

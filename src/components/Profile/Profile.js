@@ -6,6 +6,7 @@ function Profile({ user }) {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [isFormActive, setIsFormActive] = useState(false);
+  const [isFormValid, setIsFormVAlid] = useState(false);
 
   function enableForm() {
     setIsFormActive(true);
@@ -78,7 +79,7 @@ function Profile({ user }) {
                 При обновлении профиля произошла ошибка.
               </span>
               <button
-                className='profile__submit-btn'
+                className={`profile__submit-btn ${!isFormValid && 'profile__submit-btn_disabled'}`}
                 type='submit'
               >
                 Сохранить

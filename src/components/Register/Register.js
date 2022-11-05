@@ -7,6 +7,7 @@ function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('pass_holder');
+  const [isFormValid, setIsFormVAlid] = useState(false);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -76,7 +77,7 @@ function Register() {
           </span>
         </fieldset>
         <button
-          className='register__submit-btn'
+          className={`register__submit-btn ${!isFormValid && 'register__submit-btn_disabled'}`}
           type='submit'
         >
           Зарегистрироваться

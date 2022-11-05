@@ -97,6 +97,11 @@
   opacity: .7;
 }
 
+.register__submit-btn_disabled {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+}
+
 .register__tooltip {
   display: block;
   padding-top: 16px;

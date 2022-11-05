@@ -6,6 +6,7 @@ import './Login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isFormValid, setIsFormVAlid] = useState(false);
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -55,7 +56,7 @@ function Login() {
           <span className='login__error-text'></span>
         </fieldset>
         <button
-          className='login__submit-btn'
+          className={`login__submit-btn ${!isFormValid && 'login__submit-btn_disabled'}`}
           type='submit'
         >
           Войти
