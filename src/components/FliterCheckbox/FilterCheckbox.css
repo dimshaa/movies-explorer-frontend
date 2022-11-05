@@ -57,3 +57,11 @@
   line-height: 1.38;
   font-weight: 400;
 }
+
+@media screen and (max-width: 850px) {
+  .filter {
+    padding: 30px 0 61px;
+    flex-direction: row-reverse;
+    gap: 16px;
+  }
+}

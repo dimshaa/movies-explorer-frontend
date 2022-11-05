@@ -1,5 +1,6 @@
 .register {
   box-sizing: border-box;
+  height: 100%;
   min-width: 396px;
   margin: 0 auto;
   padding: 70px 0;
@@ -80,7 +81,7 @@
 .register__submit-btn {
   min-height: 45px;
   padding: 0;
-  margin: auto 0 0;
+  margin: 79px 0 0;
   border: none;
   border-radius: 3px;
   background-color: #3456F3;
@@ -89,6 +90,11 @@
   font-size: 14px;
   line-height: 1.21;
   font-weight: 500;
+  transition: opacity .4s ease-in-out;
+}
+
+.register__submit-btn:hover {
+  opacity: .7;
 }
 
 .register__tooltip {
@@ -104,4 +110,15 @@
   margin-left: 6px;
   text-decoration: none;
   color: #3456F3;
+  transition: opacity .4s ease-in-out;
+}
+
+.register__link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 850px) {
+  .register {
+    margin: auto;
+  }
 }

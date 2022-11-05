@@ -9,7 +9,7 @@
   background-color: #DDDEE3;
 }
 
-.promo__heading {
+.promo__title {
   margin: 0;
   margin-bottom: 102px;
   max-width: 600px;
@@ -26,4 +26,23 @@
   height: 244px;
   align-self: flex-end;
   background: url('../../images/hero-image.svg') no-repeat center;
+  background-size: contain;
+}
+
+@media screen and (max-width: 850px) {
+  .promo {
+    padding: 300px 44px 70px;
+  }
+
+  .promo__title {
+    margin-bottom: 140px;
+    max-width: 680px;
+    text-align: center;
+    align-self: center;
+  }
+
+  .promo__hero {
+    width: 680px;
+    align-self: center;
+  }
 }

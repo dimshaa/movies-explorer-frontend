@@ -27,7 +27,7 @@
 .not-found__return-btn {
   max-width: 42px;
   margin: 0 auto;
-  margin-top: auto;
+  margin-top: 184px;
   padding: 0;
   border: none;
   background-color: transparent;
@@ -37,4 +37,3 @@
   line-height: 1.21;
   font-weight: 400;
 }
-

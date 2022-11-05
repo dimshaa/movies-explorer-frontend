@@ -43,6 +43,11 @@
   font-size: 30px;
   line-height: 1.67;
   font-weight: 400;
+  transition: opacity .4s ease-in-out;
+}
+
+.portfolio__link:hover {
+  opacity: .7;
 }
 
 .portfolio__link::after {
@@ -50,6 +55,18 @@
   line-height: 2;
 }
 
-.portfolio__link:la {
-  border-bottom: none;
+@media screen and (max-width: 850px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 1.79;
+  }
+
+  .portfolio__link::after {
+    content: '↗';
+    line-height: 2.14;
+  }
 }

@@ -6,11 +6,23 @@
   display: block;
 }
 
-.cards-list {
-  /* width: 1080px; */
+.cards__list {
   margin: 0 auto;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 38px 20px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 850px) {
+  .cards {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .cards__list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 339px));
+    gap: 30px;
+  }
 }

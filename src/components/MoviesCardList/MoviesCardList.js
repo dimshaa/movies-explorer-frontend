@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 function MoviesCardList({ cards }) {
   return (
     <section className='cards'>
-      <ul className='cards-list'>
+      <ul className='cards__list'>
         {cards.map(card => (
           <MoviesCard key={card.id} card={card} />
         ))}
