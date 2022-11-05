@@ -37,3 +37,24 @@
   line-height: 1.21;
   font-weight: 400;
 }
+
+@media screen and (max-width: 550px) {
+  .not-found {
+    padding: 329px 0 30px;
+  }
+
+  .not-found__title {
+    margin-bottom: 10px;
+    font-size: 80px;
+  }
+
+  .not-found__message {
+    font-size: 12px;
+    line-height: 1.21;
+  }
+
+  .not-found__return-btn {
+    font-size: 12px;
+    margin-top: auto;
+  }
+}
