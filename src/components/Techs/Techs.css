@@ -86,9 +86,48 @@
     line-height: 1.5;
   }
 
+  .techs__list {
+    flex-wrap: wrap;
+  }
+
   .techs__item {
     width: 84px;
     height: 57px;
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+    font-size: 18px;
+    line-height: 1.21;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .techs {
+    background-color: #FAFAFA;
+  }
+
+  .techs__subtitle {
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: 1.21;
+  }
+
+  .techs__paragraph {
+    margin-bottom: 50px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .techs__list {
+    padding-left: 53px;
   }
 }

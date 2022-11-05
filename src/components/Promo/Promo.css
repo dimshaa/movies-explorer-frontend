@@ -31,7 +31,7 @@
 
 @media screen and (max-width: 850px) {
   .promo {
-    padding: 300px 44px 70px;
+    padding: 300px 0 70px;
   }
 
   .promo__title {
@@ -42,7 +42,30 @@
   }
 
   .promo__hero {
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
+    height: 230px;
+    background-size: contain;
     align-self: center;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .promo__hero {
+    width: 100%;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .promo {
+    padding: 183px 0 40px;
+  }
+
+  .promo__title {
+    margin-bottom: 60px;
+    max-width: 300px;
+    font-size: 31px;
+    line-height: 1.26;
   }
 }
