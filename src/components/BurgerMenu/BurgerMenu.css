@@ -41,6 +41,10 @@
 
 .burger__toggle-btn_close {
   position: fixed;
+  width: 22px;
+  height: 22px;
+  rotate: 45deg;
+  top: 26px;
   background-image: url(../../images/burger-close.svg);
 }
 
@@ -72,7 +76,9 @@
 }
 
 .burger__link_active {
+  box-sizing: border-box;
   border-bottom: 2px solid #000;
+  padding-bottom: 6px;
 }
 
 .burger__profile-edit {
@@ -99,5 +105,28 @@
 
   .burger__toggle-btn {
     display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .burger__toggle-btn {
+    right: 14px;
+  }
+
+  .burger__toggle-btn_close {
+    top: 11px;
+    right: 11px;
+  }
+
+  .burger__menu {
+    width: 100%;
+  }
+
+  .burger__links-list {
+    margin-top: 137px;
+  }
+
+  .burger__link {
+    margin-bottom: 25px;
   }
 }

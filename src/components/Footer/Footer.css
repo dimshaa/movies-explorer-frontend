@@ -54,3 +54,26 @@
     padding-right: 30px;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .footer {
+    padding: 79px 10px 10px;
+    font-size: 12px;
+    line-height: 1.21;
+  }
+
+  .footer__info {
+    margin-top: 21px;
+    flex-direction: column-reverse;
+  }
+
+  .footer__links-list {
+    margin-top: 30px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer__copyright {
+    margin-top: 30px;
+  }
+}

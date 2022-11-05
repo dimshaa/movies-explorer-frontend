@@ -92,3 +92,24 @@
     visibility: hidden;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .navigation {
+    margin-left: 0;
+  }
+  .navigation__links-list_unauthorized {
+    gap: 14px;
+  }
+
+  .navigation__link_type_signin {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .navigation__link_type_signup {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
