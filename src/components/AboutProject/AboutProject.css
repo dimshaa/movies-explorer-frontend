@@ -1,0 +1,150 @@
+.about-project {
+  box-sizing: border-box;
+  background-color: #FAFAFA;
+  margin: 0 auto;
+  padding: 110px 70px;
+  width: 100%;
+  max-width: 1280px;
+  text-align: left;
+}
+
+.about-project__title {
+  margin: 0;
+  padding-bottom: 23px;
+  margin-bottom: 70px;
+  font-size: 22px;
+  line-height: 1.22;
+  font-weight: 400;
+  letter-spacing: -.04em;
+  border-bottom: 1px solid #000;
+}
+
+.about-project__section-container {
+  display: flex;
+  gap: 40px;
+}
+
+.about-project__section {
+  width: calc(50% - 20px);
+  padding-bottom: 110px;
+}
+
+.about-project__subtitle {
+  margin: 0;
+  margin-bottom: 26px;
+  font-size: 20px;
+  line-height: 1.21;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.about-project__paragraph {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.about-project__timeline {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) 4fr;
+  text-align: center;
+}
+
+.about-project__diagram {
+  display: block;
+  width: 100%;
+  padding: 9px 0;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+.about-project__diagram_theme_dark {
+  background-color: #3456F3;
+  color: #FFF;
+}
+
+.about-project__diagram_theme_light {
+  background-color: #F2F2F2;
+  color: #000;
+}
+
+.about-project__diagram-subtitle {
+  margin: 0;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  color: #A0A0A0;
+}
+
+@media screen and (max-width: 850px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__section {
+    padding-bottom: 93px;
+  }
+
+  .about-project__paragraph {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__diagram-subtitle {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__title {
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+    font-size: 18px;
+    line-height: 1.21;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .about-project__section-container {
+    flex-direction: column;
+    margin-bottom: 60px;
+    align-items: center;
+    gap: 56px;
+  }
+
+  .about-project__section {
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .about-project__subtitle {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .about-project__paragraph {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .about-project__diagram-subtitle {
+    font-size: 18px;
+  }
+
+  .about-project__diagram {
+    padding: 11px 0;
+    font-size: 11px;
+  }
+
+  .about-project__diagram-subtitle {
+    font-size: 11px;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,155 @@
+.register {
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 396px;
+  margin: 0 auto;
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-link {
+  display: block;
+  text-align: left;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+}
+
+.register__form {
+  margin: 0 auto;
+  min-height: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.register__title {
+  margin: 0;
+  margin-top: 40px;
+  font-size: 24px;
+  line-height: 1.21;
+  font-weight: 500;
+}
+
+.register__fieldset {
+  padding: 0;
+  margin: 0;
+  margin-top: 40px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.register__label {
+  margin-bottom: 10px;
+  color: var(--font-color-additional);
+  font-size: 10px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+.register__input {
+  padding: 15px;
+  margin: 0;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background-color: #F4F4F4;
+  font-size: 13px;
+  line-height: 1.21;
+  font-weight: 500;
+}
+
+.register__input:last-of-type {
+  margin-bottom: 10px;
+}
+
+.register__input_invalid {
+  color: #EE3465;
+}
+
+.register__error-text {
+  color: #EE3465;
+  font-size: 10px;
+  line-height: 1.21;
+  font-weight: 500;
+}
+
+.register__submit-btn {
+  min-height: 45px;
+  padding: 0;
+  margin: 79px 0 0;
+  border: none;
+  border-radius: 3px;
+  background-color: #3456F3;
+  cursor: pointer;
+  color: #FFF;
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 500;
+  transition: opacity .4s ease-in-out;
+}
+
+.register__submit-btn:hover {
+  opacity: .7;
+}
+
+.register__submit-btn_disabled {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+}
+
+.register__tooltip {
+  display: block;
+  padding-top: 16px;
+  color: var(--font-color-additional);
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+.register__link {
+  margin-left: 6px;
+  text-decoration: none;
+  color: #3456F3;
+  transition: opacity .4s ease-in-out;
+}
+
+.register__link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 850px) {
+  .register {
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .register {
+    align-items: center;
+    min-width: 260px;
+  }
+
+  .register__title {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .register__fieldset {
+    margin-top: 80px;
+  }
+
+  .register__submit-btn {
+    font-size: 12px;
+  }
+
+  .register__tooltip {
+    font-size: 12px;
+  }
+}
