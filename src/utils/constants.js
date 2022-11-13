@@ -1,5 +1,7 @@
 import img from '../images/movie-image.jpg'
 
+export const MOVIES_API_URL = 'https://api.nomoreparties.co/';
+
 export const movieCards = [
   {
     id: 1,
