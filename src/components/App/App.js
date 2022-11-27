@@ -11,14 +11,13 @@ import Login from '../Login/Login';
 import { currentUser, movieCards } from '../../utils/constants';
 import NotFound from '../NotFound/NotFound';
 
-
 function App({ loggedIn }) {
   return (
     <div className="app">
       <Switch>
         <Route path='/movies'>
           <Header loggedIn={loggedIn} />
-          <Movies cards={movieCards} />
+          <Movies />
           <Footer />
         </Route>
         <Route path='/saved-movies'>

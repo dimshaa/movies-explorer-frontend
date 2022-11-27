@@ -1,23 +1,33 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import useForm from '../../hooks/useForm';
 import FilterCheckbox from '../FliterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-function SearchForm() {
-  const [query, setQuery] = useState('');
-
-  function handleQuery(e) {
-    setQuery(e.target.value);
-  }
+function SearchForm({ onSearch, query, onFilter, filterChecked }) {
+  const {
+    values,
+    isValid,
+    setValues,
+    handleChange,
+  } = useForm();
 
   function handleSubmit(e) {
+    if (!isValid) return;
+
     e.preventDefault();
+    onSearch(values.movie);
   }
+
+  useEffect(() => {
+    setValues({ movie: query });
+  }, [setValues, query])
 
   return (
     <section className='search'>
       <form
         className='search__form'
         onSubmit={handleSubmit}
+        noValidate
       >
         <input
           className='search__input'
@@ -25,9 +35,8 @@ function SearchForm() {
           placeholder='Фильм'
           id='movie'
           name='movie'
-          minLength={1}
-          value={query}
-          onChange={handleQuery}
+          value={values.movie || ''}
+          onChange={handleChange}
           required
         />
         <button
@@ -37,7 +46,10 @@ function SearchForm() {
           Найти
         </button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox
+        onFilter={onFilter}
+        filterChecked={filterChecked}
+      />
     </section>
   );
 };
