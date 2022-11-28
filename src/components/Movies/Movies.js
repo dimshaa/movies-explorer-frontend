@@ -66,7 +66,7 @@ function Movies() {
   useEffect(() => {
     if (!currentSearch) return;
 
-    (filterChecked && movies.length) ? setMovies(filterShortMovies(currentSearch.movies)) : setMovies(currentSearch.movies);
+    (filterChecked) ? setMovies(filterShortMovies(movies)) : setMovies(currentSearch.movies);
   }, [filterChecked]);
 
   return (
