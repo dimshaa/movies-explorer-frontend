@@ -40,8 +40,9 @@ function SearchForm({ onSearch, query, onFilter, filterChecked }) {
           required
         />
         <button
-          className='search__submit-btn'
+          className={`search__submit-btn ${!isValid && 'search__submit-btn_disabled'}`}
           type='submit'
+          disabled={!isValid}
         >
           Найти
         </button>
