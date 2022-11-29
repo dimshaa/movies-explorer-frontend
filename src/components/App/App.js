@@ -12,6 +12,7 @@ import NotFound from '../NotFound/NotFound';
 import { currentUser, movieCards } from '../../utils/constants';
 import { useState } from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const currentPath = useLocation();
@@ -30,41 +31,43 @@ function App() {
     currentPath.pathname === '/saved-movies'
 
   return (
-    <div className="app">
-      {headerShown && <Header loggedIn={loggedIn} />}
-      <Switch>
-        <ProtectedRoute
-          path='/movies'
-          component={Movies}
-          loggedIn={loggedIn}
-        />
-        <ProtectedRoute
-          path='/saved-movies'
-          component={SavedMovies}
-          loggedIn={loggedIn}
-          cards={[]}
-        />
-        <ProtectedRoute
-          path='/profile'
-          component={Profile}
-          loggedIn={loggedIn}
-          user={currentUser}
-        />
-        <Route path='/signup'>
-          <Register />
-        </Route>
-        <Route path='/signin'>
-          <Login />
-        </Route>
-        <Route exact path='/'>
-          <Main />
-        </Route>
-        <Route path='*'>
-          <NotFound />
-        </Route>
-      </Switch>
-      {footerShown && <Footer />}
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        {headerShown && <Header loggedIn={loggedIn} />}
+        <Switch>
+          <ProtectedRoute
+            path='/movies'
+            component={Movies}
+            loggedIn={loggedIn}
+          />
+          <ProtectedRoute
+            path='/saved-movies'
+            component={SavedMovies}
+            loggedIn={loggedIn}
+            cards={[]}
+          />
+          <ProtectedRoute
+            path='/profile'
+            component={Profile}
+            loggedIn={loggedIn}
+            user={currentUser}
+          />
+          <Route path='/signup'>
+            <Register />
+          </Route>
+          <Route path='/signin'>
+            <Login />
+          </Route>
+          <Route exact path='/'>
+            <Main />
+          </Route>
+          <Route path='*'>
+            <NotFound />
+          </Route>
+        </Switch>
+        {footerShown && <Footer />}
+      </div>
+    </CurrentUserContext.Provider>
   );
 };
 
