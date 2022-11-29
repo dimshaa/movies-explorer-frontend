@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -8,27 +8,48 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import { currentUser, movieCards } from '../../utils/constants';
 import NotFound from '../NotFound/NotFound';
+import { currentUser, movieCards } from '../../utils/constants';
+import { useState } from 'react';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-function App({ loggedIn }) {
+function App() {
+  const currentPath = useLocation();
+
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  const headerShown =
+    currentPath.pathname === '/' ||
+    currentPath.pathname === '/movies' ||
+    currentPath.pathname === '/saved-movies' ||
+    currentPath.pathname === '/profile'
+
+  const footerShown =
+    currentPath.pathname === '/' ||
+    currentPath.pathname === '/movies' ||
+    currentPath.pathname === '/saved-movies'
+
   return (
     <div className="app">
+      {headerShown && <Header loggedIn={loggedIn} />}
       <Switch>
-        <Route path='/movies'>
-          <Header loggedIn={loggedIn} />
-          <Movies />
-          <Footer />
-        </Route>
-        <Route path='/saved-movies'>
-          <Header loggedIn={loggedIn} />
-          <SavedMovies cards={movieCards.filter(card => card.isSaved)} />
-          <Footer />
-        </Route>
-        <Route path='/profile'>
-          <Header loggedIn={loggedIn} />
-          <Profile user={currentUser} />
-        </Route>
+        <ProtectedRoute
+          path='/movies'
+          component={Movies}
+          loggedIn={loggedIn}
+        />
+        <ProtectedRoute
+          path='/saved-movies'
+          component={SavedMovies}
+          loggedIn={loggedIn}
+          cards={[]}
+        />
+        <ProtectedRoute
+          path='/profile'
+          component={Profile}
+          loggedIn={loggedIn}
+          user={currentUser}
+        />
         <Route path='/signup'>
           <Register />
         </Route>
@@ -36,14 +57,13 @@ function App({ loggedIn }) {
           <Login />
         </Route>
         <Route exact path='/'>
-          <Header loggedIn={loggedIn} />
           <Main />
-          <Footer />
         </Route>
         <Route path='*'>
           <NotFound />
         </Route>
       </Switch>
+      {footerShown && <Footer />}
     </div>
   );
 };
