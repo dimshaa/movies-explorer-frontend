@@ -4,9 +4,13 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import './Movies.css';
+import useWindowWidth from '../../hooks/useWindowWidth';
+import { useLocation } from 'react-router-dom';
 
 function Movies() {
   const currentSearch = JSON.parse(localStorage.getItem('currentSearch'));
+  const width = useWindowWidth();
+  const currentPath = useLocation();
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -26,34 +30,80 @@ function Movies() {
       ({ duration }) =>
         duration < 41
     );
-  }
+  };
+
+  const [lastCardIndex, setLastCardIndex] = useState(0);
+  const [numberToAdd, setNumberToAdd] = useState(0);
+  const [cards, setCards] = useState([]);
+
+
+  function getCardsNumber() {
+    if (width < 780) {
+      setLastCardIndex(5);
+      setNumberToAdd(2);
+      return
+    }
+    if (width < 1005) {
+      setLastCardIndex(8);
+      setNumberToAdd(2);
+      return
+    }
+    if (width < 1296) {
+      setLastCardIndex(12);
+      setNumberToAdd(3);
+      return
+    } else {
+      setLastCardIndex(16);
+      setNumberToAdd(4);
+      return
+    }
+  };
 
   function handleSearch(query) {
     setIsLoading(true);
 
     getMovies()
-      .then((movies) => {
-        let foundMovies = findMovies(movies, query);
-        const currentSearch = {query: query, movies: foundMovies, filterChecked: filterChecked};
+    .then((movies) => {
+      let foundMovies = findMovies(movies, query);
+      const currentSearch = {query: query, movies: foundMovies, filterChecked: filterChecked};
 
-        if (filterChecked) {
-          foundMovies = filterShortMovies(foundMovies);
-        }
+      if (filterChecked) {
+        foundMovies = filterShortMovies(foundMovies);
+      }
 
-        setMovies(foundMovies);
-        setQuery(query);
-        localStorage.setItem('currentSearch', JSON.stringify(currentSearch));
-      })
-      .catch(err => console.log(err))
-      .finally(() => {
-        setTimeout(setIsLoading(false), 5000); // timer to check if Preloader works
-      });
+      setMovies(foundMovies);
+      setQuery(query);
+      localStorage.setItem('currentSearch', JSON.stringify(currentSearch));
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      setTimeout(setIsLoading(false), 5000); // timer to check if Preloader works
+    });
   };
 
   function handleFilter() {
     setFilterChecked(!filterChecked);
     localStorage.setItem('currentSearch', JSON.stringify({...currentSearch, filterChecked: !filterChecked}))
   }
+
+  function handleMoreCards() {
+    setLastCardIndex(cards.length + numberToAdd);
+  };
+
+  useEffect(() => {
+    if (!currentSearch) return;
+
+    (filterChecked) ? setMovies(filterShortMovies(movies)) : setMovies(currentSearch.movies);
+  }, [filterChecked]);
+
+  useEffect(() => {
+    getCardsNumber();
+  }, [width]);
+
+  useEffect(() => {
+    const cards = movies.slice(0, lastCardIndex);
+    setCards(cards);
+  }, [movies, lastCardIndex]);
 
   useEffect(() => {
     if (!currentSearch) return;
@@ -63,11 +113,7 @@ function Movies() {
     setFilterChecked(currentSearch.filterChecked);
   }, []);
 
-  useEffect(() => {
-    if (!currentSearch) return;
-
-    (filterChecked) ? setMovies(filterShortMovies(movies)) : setMovies(currentSearch.movies);
-  }, [filterChecked]);
+  const isMoreBtnVisible = (currentPath.pathname === '/movies') && (cards.length !== movies.length);
 
   return (
     <main className='movies'>
@@ -82,13 +128,16 @@ function Movies() {
         <Preloader />
       ) : (
         <>
-          <MoviesCardList cards={movies} />
+          <MoviesCardList cards={cards} />
+          {isMoreBtnVisible && (
           <button
             className='movie__more-btn'
             type='button'
+            onClick={handleMoreCards}
           >
             Ещё
           </button>
+          )}
         </>
       )
     }
