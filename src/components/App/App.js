@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -9,15 +9,50 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
-import { currentUser, movieCards } from '../../utils/constants';
 import { useState } from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { login, register } from '../../utils/MainApi';
+import useForm from '../../hooks/useForm';
 
 function App() {
   const currentPath = useLocation();
+  const history = useHistory();
+  const { resetForm } = useForm();
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  function handleLogin({ email, password }) {
+    setIsLoading(true);
+
+    login({ email, password })
+      .then(user => {
+        localStorage.setItem('loggedIn', true);
+        setLoggedIn(localStorage.getItem('loggedIn'));
+        setCurrentUser(user);
+        history.push('/movies');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  function handleRegister({ email, name, password }) {
+    setIsLoading(true);
+
+    register({ email, name, password })
+      .then((user) => {
+        handleLogin(user);
+        resetForm();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const headerShown =
     currentPath.pathname === '/' ||
@@ -53,10 +88,16 @@ function App() {
             user={currentUser}
           />
           <Route path='/signup'>
-            <Register />
+            <Register
+              onRegister={handleRegister}
+              isLoading={isLoading}
+            />
           </Route>
           <Route path='/signin'>
-            <Login />
+            <Login
+              onLogin={handleLogin}
+              isLoading={isLoading}
+            />
           </Route>
           <Route exact path='/'>
             <Main />
