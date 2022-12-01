@@ -25,7 +25,6 @@ function Profile({ isLoading, serverErrorText, onUpdateUser, onLogout }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(values)
     onUpdateUser(values);
     resetForm()
   };
