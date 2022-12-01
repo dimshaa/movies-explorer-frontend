@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MOVIES_API_URL } from '../../utils/constants';
 import './MoviesCard.css';
@@ -15,13 +14,17 @@ function MoviesCard({ card, savedMovies, onLike, onDelete }) {
     return (hours < 1) ? `${minutes}м` : `${hours}ч ${minutes}м`;
   };
 
+  function transformUrl({ image }) {
+    return currentPath.pathname === '/movies' ? `${MOVIES_API_URL}${card.image.url}` : image
+  }
+
   function handleAdd() {
     onLike(card)
   };
 
   function handleDelete() {
     const movieToDelete = savedMovies.find(movie => movie.movieId === card.id)
-    onDelete(movieToDelete._id);
+    onDelete(currentPath.pathname === '/movies' ? movieToDelete._id : card._id);
   };
 
   return (
@@ -32,7 +35,7 @@ function MoviesCard({ card, savedMovies, onLike, onDelete }) {
         target='_blank'
         rel='noreferrer'
       >
-        <img className='card__image' src={`${MOVIES_API_URL}${card.image.url}`} alt={card.nameRU} />
+        <img className='card__image' src={transformUrl(card)} alt={card.nameRU} />
       </a>
       <div className='card__info'>
         <h2 className='card__title'>{card.nameRU}</h2>
@@ -48,6 +51,7 @@ function MoviesCard({ card, savedMovies, onLike, onDelete }) {
           <button
             className={`card__save-btn ${isSaved && 'card__save-btn_delete'}`}
             type='button'
+            onClick={isSaved && handleDelete}
             aria-label='удалить из избранного'
           >
           </button>
