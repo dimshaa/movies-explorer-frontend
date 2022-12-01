@@ -1,4 +1,4 @@
-import { MAIN_API_URL } from './constants';
+import { MAIN_API_URL, MOVIES_API_URL } from './constants';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -68,13 +68,25 @@ export function addMovie(movie) {
     method: 'POST',
     headers,
     credentials: 'include',
-    body: JSON.stringify(movie),
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director ,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `${MOVIES_API_URL}${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `${MOVIES_API_URL}${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }),
   })
   .then(res => checkResponse(res));
 };
 
-export function deleteMovie(movie) {
-  return fetch(`${MAIN_API_URL}/movies/${movie}`, {
+export function deleteMovie(movieId) {
+  return fetch(`${MAIN_API_URL}/movies/${movieId}`, {
     method: 'DELETE',
     headers,
     credentials: 'include',

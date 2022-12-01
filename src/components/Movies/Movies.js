@@ -7,7 +7,7 @@ import './Movies.css';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { useLocation } from 'react-router-dom';
 
-function Movies() {
+function Movies({ savedMovies, onLike, onDelete }) {
   const currentSearch = JSON.parse(localStorage.getItem('currentSearch'));
   const width = useWindowWidth();
   const currentPath = useLocation();
@@ -128,7 +128,12 @@ function Movies() {
         <Preloader />
       ) : (
         <>
-          <MoviesCardList cards={cards} />
+          <MoviesCardList
+            cards={cards}
+            savedMovies={savedMovies}
+            onLike={onLike}
+            onDelete={onDelete}
+          />
           {isMoreBtnVisible && (
           <button
             className='movie__more-btn'

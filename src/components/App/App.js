@@ -12,7 +12,7 @@ import NotFound from '../NotFound/NotFound';
 import { useEffect, useState } from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { getUserInfo, login, register, updateUserInfo } from '../../utils/MainApi';
+import { getUserInfo, login, register, updateUserInfo, addMovie, deleteMovie, getSavedMovies } from '../../utils/MainApi';
 import useForm from '../../hooks/useForm';
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
+  const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -33,6 +34,15 @@ function App() {
         .catch(err => console.log(err));
     }
   }, [history, loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      getSavedMovies()
+        .then(movies => {
+          setSavedMovies(movies);
+        })
+    }
+  }, [loggedIn]);
 
   function handleLogin({ email, password }) {
     setIsLoading(true);
@@ -77,6 +87,22 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  function handleAddMovie(movie) {
+    addMovie(movie)
+      .then(addedMovie => {
+        setSavedMovies([addedMovie, ...savedMovies]);
+      })
+      .catch(err => console.log(err));
+  };
+
+  function handleDeleteMovie(movieId) {
+    deleteMovie(movieId)
+      .then(() => {
+        setSavedMovies((state) => state.filter((m) => m._id !== movieId));
+      })
+      .catch(err => console.log(err));
+  };
+
   const headerShown =
     currentPath.pathname === '/' ||
     currentPath.pathname === '/movies' ||
@@ -96,12 +122,17 @@ function App() {
           <ProtectedRoute
             path='/movies'
             component={Movies}
+            savedMovies={savedMovies}
             loggedIn={loggedIn}
+            onLike={handleAddMovie}
+            onDelete={handleDeleteMovie}
           />
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
+            savedMovies={savedMovies}
             loggedIn={loggedIn}
+            onDelete={handleDeleteMovie}
             cards={[]}
           />
           <ProtectedRoute
