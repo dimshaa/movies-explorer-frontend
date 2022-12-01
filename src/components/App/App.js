@@ -65,7 +65,7 @@ function App() {
 
     register({ email, name, password })
       .then(user => {
-        handleLogin(user);
+        handleLogin({...user, password});
         resetForm();
       })
       .catch(err => {
