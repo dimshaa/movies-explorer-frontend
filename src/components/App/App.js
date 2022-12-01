@@ -9,10 +9,10 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { login, register } from '../../utils/MainApi';
+import { getUserInfo, login, register, updateUserInfo } from '../../utils/MainApi';
 import useForm from '../../hooks/useForm';
 
 function App() {
@@ -22,7 +22,17 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
+
+  useEffect(() => {
+    if (loggedIn) {
+      getUserInfo()
+        .then(user => {
+          setCurrentUser(user);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [history, loggedIn]);
 
   function handleLogin({ email, password }) {
     setIsLoading(true);
@@ -44,9 +54,22 @@ function App() {
     setIsLoading(true);
 
     register({ email, name, password })
-      .then((user) => {
+      .then(user => {
         handleLogin(user);
         resetForm();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  function handleUpdateUser({ name, email }) {
+    setIsLoading(true);
+
+    updateUserInfo({ name, email })
+      .then(user => {
+        setCurrentUser(user);
       })
       .catch(err => {
         console.log(err);
@@ -85,7 +108,8 @@ function App() {
             path='/profile'
             component={Profile}
             loggedIn={loggedIn}
-            user={currentUser}
+            isLoading={isLoading}
+            onUpdateUser={handleUpdateUser}
           />
           <Route path='/signup'>
             <Register

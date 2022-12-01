@@ -34,7 +34,6 @@
   display: flex;
   text-align: left;
   hyphens: none;
-  margin-bottom: 17px;
   padding-bottom: 16px;
   border-bottom: 1px solid #E8E8E8;
   font-size: 11px;
@@ -56,6 +55,21 @@
   text-align: right;
   border: none;
   outline: none;
+}
+
+.profile__error-text {
+  color: #EE3465;
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  min-height: 12px;
+  font-size: 10px;
+  line-height: 1.21;
+  font-weight: 400;
+}
+
+.profile__error-text:last-of-type {
+  margin-top: 10px;
 }
 
 .profile__edit {

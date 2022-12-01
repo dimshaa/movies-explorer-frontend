@@ -44,6 +44,7 @@ export function getUserInfo() {
 
 export function updateUserInfo({ name, email }) {
   return fetch(`${MAIN_API_URL}/users/me`, {
+    method: 'PATCH',
     headers,
     credentials: 'include',
     body: JSON.stringify({

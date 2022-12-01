@@ -1,33 +1,49 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import useForm from '../../hooks/useForm';
+import { EMAIL_REGEXP, NAME_REGEXP } from '../../utils/constants';
 import './Profile.css';
 
-function Profile({ user }) {
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
+function Profile({ isLoading, serverErrorText, onUpdateUser, onLogOut }) {
+  const user = useContext(CurrentUserContext);
   const [isFormActive, setIsFormActive] = useState(false);
-  const [isFormValid, setIsFormVAlid] = useState(false);
+
+  const {
+    values,
+    setValues,
+    errors,
+    handleChange,
+    isValid,
+    resetForm,
+  } = useForm();
 
   function enableForm() {
     setIsFormActive(true);
   }
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    setIsFormActive(false);
+
+    console.log(values)
+    onUpdateUser(values);
+    resetForm()
   };
 
+  useEffect(() => {
+    setValues({
+      name: user?.name,
+      email: user?.email,
+    });
+  }, [setValues, user]);
+
   return (
-    <main className='profile' name='profile' onSubmit={handleSubmit}>
-      <form className='profile__form'>
+    <main className='profile' name='profile'>
+      <form
+        className='profile__form'
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <h2 className='profile__title'>
           {`Привет, ${user.name}!`}
         </h2>
@@ -40,11 +56,16 @@ function Profile({ user }) {
               id='name'
               name='name'
               minLength={1}
-              value={name}
-              onChange={handleNameChange}
+              value={values.name || ''}
+              pattern={NAME_REGEXP}
+              onChange={handleChange}
+              disabled={!isFormActive || isLoading}
               required
             />
           </label>
+          <span className='profile__error-text'>
+            {errors.name}
+          </span>
           <label className='profile__label' htmlFor='email'>
               E&#8209;mail
             <input
@@ -53,11 +74,16 @@ function Profile({ user }) {
               id='email'
               name='email'
               minLength={1}
-              value={email}
-              onChange={handleEmailChange}
+              value={values.email || ''}
+              pattern={EMAIL_REGEXP}
+              onChange={handleChange}
+              disabled={!isFormActive || isLoading}
               required
             />
           </label>
+          <span className='profile__error-text'>
+            {errors.email}
+          </span>
         </fieldset>
           <div className='profile__edit'>
           {!isFormActive ? (
@@ -69,20 +95,25 @@ function Profile({ user }) {
               >
                 Редактировать
               </button>
-              <Link className='profile__logout' to='/'>
+              <Link
+                className='profile__logout'
+                onClick={() => console.log('aaaaaa')}
+                to='/'
+              >
                 Выйти из аккаунта
               </Link>
             </>
           ) : (
             <>
               <span className='profile__error-message'>
-                При обновлении профиля произошла ошибка.
+                {serverErrorText}
               </span>
               <button
-                className={`profile__submit-btn ${!isFormValid && 'profile__submit-btn_disabled'}`}
+                className={`profile__submit-btn ${(!isValid || isLoading) && 'profile__submit-btn_disabled'}`}
+                disabled={!isValid || isLoading}
                 type='submit'
               >
-                Сохранить
+                {isLoading ? 'Сохранение...' : 'Сохранить'}
               </button>
             </>
           )}
