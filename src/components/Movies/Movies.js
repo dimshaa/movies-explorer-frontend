@@ -6,6 +6,7 @@ import Preloader from '../Preloader/Preloader';
 import './Movies.css';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { useLocation } from 'react-router-dom';
+import { filterShortMovies, findMovies } from '../../utils/utils';
 
 function Movies({ savedMovies, onLike, onDelete }) {
   const currentSearch = JSON.parse(localStorage.getItem('currentSearch'));
@@ -16,21 +17,6 @@ function Movies({ savedMovies, onLike, onDelete }) {
   const [query, setQuery] = useState('');
   const [filterChecked, setFilterChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  function findMovies(movies, query) {
-    return movies.filter(
-      ({ nameRU, nameEN }) =>
-        nameRU.toLowerCase().includes(query.toLowerCase()) ||
-        nameEN.toLowerCase().includes(query.toLowerCase())
-    );
-  };
-
-  function filterShortMovies(movies) {
-    return movies.filter(
-      ({ duration }) =>
-        duration < 41
-    );
-  };
 
   const [lastCardIndex, setLastCardIndex] = useState(0);
   const [numberToAdd, setNumberToAdd] = useState(0);
