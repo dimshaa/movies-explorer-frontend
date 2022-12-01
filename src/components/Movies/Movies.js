@@ -77,13 +77,17 @@ function Movies({ savedMovies, onLike, onDelete }) {
     })
     .catch(err => console.log(err))
     .finally(() => {
-      setTimeout(setIsLoading(false), 5000); // timer to check if Preloader works
+      setIsLoading(false)
     });
   };
 
   function handleFilter() {
     setFilterChecked(!filterChecked);
-    localStorage.setItem('currentSearch', JSON.stringify({...currentSearch, filterChecked: !filterChecked}))
+    if (!currentSearch) {
+      localStorage.setItem('currentSearch', JSON.stringify({query: '', movies: [], filterChecked: !filterChecked}));
+    } else {
+      localStorage.setItem('currentSearch', JSON.stringify({...currentSearch, filterChecked: !filterChecked}))
+    }
   }
 
   function handleMoreCards() {
