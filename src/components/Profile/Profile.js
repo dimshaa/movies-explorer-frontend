@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm';
 import { EMAIL_REGEXP, NAME_REGEXP } from '../../utils/constants';
 import './Profile.css';
 
-function Profile({ isLoading, serverErrorText, onUpdateUser, onLogOut }) {
+function Profile({ isLoading, serverErrorText, onUpdateUser, onLogout }) {
   const user = useContext(CurrentUserContext);
   const [isFormActive, setIsFormActive] = useState(false);
 
@@ -97,7 +97,7 @@ function Profile({ isLoading, serverErrorText, onUpdateUser, onLogOut }) {
               </button>
               <Link
                 className='profile__logout'
-                onClick={() => console.log('aaaaaa')}
+                onClick={() => onLogout()}
                 to='/'
               >
                 Выйти из аккаунта

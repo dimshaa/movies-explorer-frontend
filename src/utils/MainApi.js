@@ -55,6 +55,14 @@ export function updateUserInfo({ name, email }) {
   .then(res => checkResponse(res));
 };
 
+export function logout() {
+  return fetch(`${MAIN_API_URL}/signout`, {
+    headers,
+    credentials: 'include',
+  })
+  .then(res => checkResponse(res));
+};
+
 export function getSavedMovies() {
   return fetch(`${MAIN_API_URL}/movies`, {
     headers,

@@ -12,7 +12,7 @@ import NotFound from '../NotFound/NotFound';
 import { useEffect, useState } from 'react';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { getUserInfo, login, register, updateUserInfo, addMovie, deleteMovie, getSavedMovies } from '../../utils/MainApi';
+import { getUserInfo, login, register, updateUserInfo, addMovie, deleteMovie, getSavedMovies, logout } from '../../utils/MainApi';
 import useForm from '../../hooks/useForm';
 
 function App() {
@@ -87,6 +87,17 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  function handleLogout() {
+    logout()
+      .then(() => {
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.clear();
+        history.push('/');
+      })
+      .catch(err => console.log(err));
+  }
+
   function handleAddMovie(movie) {
     addMovie(movie)
       .then(addedMovie => {
@@ -141,6 +152,7 @@ function App() {
             loggedIn={loggedIn}
             isLoading={isLoading}
             onUpdateUser={handleUpdateUser}
+            onLogout={handleLogout}
           />
           <Route path='/signup'>
             <Register
