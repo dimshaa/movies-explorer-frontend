@@ -12,6 +12,7 @@ export function register({ email, name, password }) {
   return fetch(`${MAIN_API_URL}/signup`, {
     method: 'POST',
     headers,
+    credentials: 'include',
     body: JSON.stringify({
       email,
       name,
