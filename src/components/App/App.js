@@ -15,6 +15,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { getUserInfo, login, register, updateUserInfo, addMovie, deleteMovie, getSavedMovies, logout } from '../../utils/MainApi';
 import useForm from '../../hooks/useForm';
 import { PROFILE_UPD_ERROR_MESSAGE, PROFILE_UPD_SUCCESS_MESSAGE, UNAUTHORIZED_ERROR } from '../../utils/constants';
+import { handleError } from '../../utils/utils';
 
 function App() {
   const currentPath = useLocation();
@@ -26,6 +27,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
   const [savedMovies, setSavedMovies] = useState([]);
   const [profileUpdateMessage, setProfileUpdateMessage] = useState('');
+  const [registerMessage, setRegisterMessage] = useState('');
+  const [loginMessage, setLoginMessage] = useState('');
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -33,6 +36,8 @@ function App() {
       getUserInfo()
         .then(user => {
           setCurrentUser(user);
+          setLoginMessage('');
+          setRegisterMessage('');
         })
         .catch(err => {
           console.log(err);
@@ -68,9 +73,12 @@ function App() {
         localStorage.setItem('loggedIn', true);
         setLoggedIn(localStorage.getItem('loggedIn'));
         setCurrentUser(user);
+        setIsError(false);
         history.push('/movies');
       })
       .catch(err => {
+        setIsError(true);
+        setLoginMessage(handleError(err));
         console.log(err);
       })
       .finally(() => setIsLoading(false));
@@ -82,9 +90,12 @@ function App() {
     register({ email, name, password })
       .then(user => {
         handleLogin({...user, password});
+        setIsError(false);
         resetForm();
       })
       .catch(err => {
+        setIsError(true);
+        setRegisterMessage(handleError(err));
         console.log(err);
       })
       .finally(() => setIsLoading(false));
@@ -207,6 +218,8 @@ function App() {
               <Register
                 onRegister={handleRegister}
                 isLoading={isLoading}
+                serverResponseMessage={registerMessage}
+                isError={isError}
               />
             )}
           </Route>
@@ -217,6 +230,8 @@ function App() {
               <Login
                 onLogin={handleLogin}
                 isLoading={isLoading}
+                serverResponseMessage={loginMessage}
+                isError={isError}
               />
             )}
           </Route>

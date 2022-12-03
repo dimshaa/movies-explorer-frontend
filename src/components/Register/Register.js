@@ -4,7 +4,7 @@ import logo from '../../images/logo.svg';
 import { EMAIL_REGEXP, NAME_REGEXP } from '../../utils/constants';
 import './Register.css';
 
-function Register({ onRegister, isLoading }) {
+function Register({ onRegister, isLoading, serverResponseMessage, isError }) {
   const {
     values,
     handleChange,
@@ -87,6 +87,9 @@ function Register({ onRegister, isLoading }) {
             {errors.password}
           </span>
         </fieldset>
+        <span className={`register__message ${isError && 'register__message_error'}`}>
+          {serverResponseMessage}
+        </span>
         <button
           className={`register__submit-btn ${(!isValid || isLoading) && 'register__submit-btn_disabled'}`}
           type='submit'

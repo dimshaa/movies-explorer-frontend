@@ -87,7 +87,6 @@
 .register__submit-btn {
   min-height: 45px;
   padding: 0;
-  margin: 79px 0 0;
   border: none;
   border-radius: 3px;
   background-color: #3456F3;
@@ -106,6 +105,20 @@
 .register__submit-btn_disabled {
   color: #C2C2C2;
   background-color: #F8F8F8;
+}
+
+.register__message {
+  text-align: center;
+  min-height: 13px;
+  margin-top: 63px;
+  margin-bottom: 20px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.21;
+}
+
+.register__message_error {
+  color: #EE3465;
 }
 
 .register__tooltip {

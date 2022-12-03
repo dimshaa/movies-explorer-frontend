@@ -87,7 +87,6 @@
 .login__submit-btn {
   min-height: 45px;
   padding: 0;
-  margin: 179px 0 0;
   border: none;
   border-radius: 3px;
   background-color: #3456F3;
@@ -106,6 +105,20 @@
 .login__submit-btn_disabled {
   color: #C2C2C2;
   background-color: #F8F8F8;
+}
+
+.login__message {
+  text-align: center;
+  min-height: 13px;
+  margin-top: 163px;
+  margin-bottom: 20px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.21;
+}
+
+.login__message_error {
+  color: #EE3465;
 }
 
 .login__tooltip {

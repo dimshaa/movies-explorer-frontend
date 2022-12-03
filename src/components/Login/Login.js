@@ -4,7 +4,7 @@ import logo from '../../images/logo.svg';
 import { EMAIL_REGEXP } from '../../utils/constants';
 import './Login.css';
 
-function Login({ onLogin, isLoading }) {
+function Login({ onLogin, isLoading, serverResponseMessage, isError }) {
   const {
     values,
     handleChange,
@@ -70,6 +70,9 @@ function Login({ onLogin, isLoading }) {
             {errors.password}
           </span>
         </fieldset>
+        <span className={`login__message ${isError && 'login__message_error'}`}>
+            {serverResponseMessage}
+          </span>
         <button
           className={`login__submit-btn ${(!isValid || isLoading) && 'login__submit-btn_disabled'}`}
           type='submit'
