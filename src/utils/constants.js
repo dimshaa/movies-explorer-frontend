@@ -4,6 +4,31 @@ export const MAIN_API_URL = 'https://api.mydiploma.nomoredomains.icu';
 export const EMAIL_REGEXP = '^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+[.][A-Za-z]{2,6}$';
 export const NAME_REGEXP = '^[а-яА-ЯёЁa-zA-Z-—\\s]+$';
 
+export const MAX_SHORT_MOVIE_DURATION = 40;
+
+export const SMALL_SCREEN = {
+  WIDTH: 780,
+  LAST_CARD_INDEX: 5,
+  NUMBER_TO_ADD: 2,
+};
+
+export const MEDIUM_SCREEN = {
+  WIDTH: 1005,
+  LAST_CARD_INDEX: 8,
+  NUMBER_TO_ADD: 2,
+};
+
+export const LARGE_SCREEN = {
+  WIDTH: 1296,
+  LAST_CARD_INDEX: 12,
+  NUMBER_TO_ADD: 3,
+};
+
+export const OVERALL_SCREEN = {
+  LAST_CARD_INDEX: 16,
+  NUMBER_TO_ADD: 4,
+};
+
 export const BAD_REQUEST_ERROR = 400;
 export const UNAUTHORIZED_ERROR = 401;
 export const CONFLICT_ERROR = 409;

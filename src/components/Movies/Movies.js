@@ -7,6 +7,7 @@ import './Movies.css';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { useLocation } from 'react-router-dom';
 import { filterShortMovies, findMovies } from '../../utils/utils';
+import { LARGE_SCREEN, MEDIUM_SCREEN, OVERALL_SCREEN, SMALL_SCREEN } from '../../utils/constants';
 
 function Movies({ savedMovies, onLike, onDelete }) {
   const currentSearch = JSON.parse(localStorage.getItem('currentSearch'));
@@ -24,23 +25,23 @@ function Movies({ savedMovies, onLike, onDelete }) {
 
 
   function getCardsNumber() {
-    if (width < 780) {
-      setLastCardIndex(5);
-      setNumberToAdd(2);
+    if (width < SMALL_SCREEN.WIDTH) {
+      setLastCardIndex(SMALL_SCREEN.LAST_CARD_INDEX);
+      setNumberToAdd(SMALL_SCREEN.NUMBER_TO_ADD);
       return
     }
-    if (width < 1005) {
-      setLastCardIndex(8);
-      setNumberToAdd(2);
+    if (width < MEDIUM_SCREEN.WIDTH) {
+      setLastCardIndex(MEDIUM_SCREEN.LAST_CARD_INDEX);
+      setNumberToAdd(MEDIUM_SCREEN.NUMBER_TO_ADD);
       return
     }
-    if (width < 1296) {
-      setLastCardIndex(12);
-      setNumberToAdd(3);
+    if (width < LARGE_SCREEN.WIDTH) {
+      setLastCardIndex(LARGE_SCREEN.LAST_CARD_INDEX);
+      setNumberToAdd(LARGE_SCREEN.NUMBER_TO_ADD);
       return
     } else {
-      setLastCardIndex(16);
-      setNumberToAdd(4);
+      setLastCardIndex(OVERALL_SCREEN.LAST_CARD_INDEX);
+      setNumberToAdd(OVERALL_SCREEN.NUMBER_TO_ADD);
       return
     }
   };
