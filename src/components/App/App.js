@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -155,16 +155,24 @@ function App() {
             onLogout={handleLogout}
           />
           <Route path='/signup'>
-            <Register
-              onRegister={handleRegister}
-              isLoading={isLoading}
-            />
+            {loggedIn ? (
+              <Redirect to='/'/>
+            ):(
+              <Register
+                onRegister={handleRegister}
+                isLoading={isLoading}
+              />
+            )}
           </Route>
           <Route path='/signin'>
-            <Login
-              onLogin={handleLogin}
-              isLoading={isLoading}
-            />
+            {loggedIn ? (
+              <Redirect to='/'/>
+            ):(
+              <Login
+                onLogin={handleLogin}
+                isLoading={isLoading}
+              />
+            )}
           </Route>
           <Route exact path='/'>
             <Main />
