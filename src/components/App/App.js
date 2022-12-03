@@ -14,6 +14,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { getUserInfo, login, register, updateUserInfo, addMovie, deleteMovie, getSavedMovies, logout } from '../../utils/MainApi';
 import useForm from '../../hooks/useForm';
+import { PROFILE_UPD_ERROR_MESSAGE, PROFILE_UPD_SUCCESS_MESSAGE } from '../../utils/constants';
 
 function App() {
   const currentPath = useLocation();
@@ -24,6 +25,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
   const [savedMovies, setSavedMovies] = useState([]);
+  const [profileUpdateMessage, setProfileUpdateMessage] = useState('');
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (loggedIn) {
@@ -93,15 +96,21 @@ function App() {
     updateUserInfo({ name, email })
       .then(user => {
         setCurrentUser(user);
+        setIsError(false);
+        setProfileUpdateMessage(PROFILE_UPD_SUCCESS_MESSAGE);
       })
       .catch(err => {
         console.log(err);
-        setLoggedIn(false);
-        setCurrentUser({});
-        localStorage.clear();
-        history.push('/');
+        setIsError(true);
+        setProfileUpdateMessage(PROFILE_UPD_ERROR_MESSAGE);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() =>{
+        setTimeout(() => {
+          setIsLoading(false);
+          setIsError(false);
+          setProfileUpdateMessage('');
+        }, 2000);
+      });
   };
 
   function handleLogout() {
@@ -135,7 +144,7 @@ function App() {
         setSavedMovies((state) => state.filter((m) => m._id !== movieId));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.status);
         setLoggedIn(false);
         setCurrentUser({});
         localStorage.clear();
@@ -180,6 +189,8 @@ function App() {
             component={Profile}
             loggedIn={loggedIn}
             isLoading={isLoading}
+            isError={isError}
+            serverResponseMessage={profileUpdateMessage}
             onUpdateUser={handleUpdateUser}
             onLogout={handleLogout}
           />

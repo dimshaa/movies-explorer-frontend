@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm';
 import { EMAIL_REGEXP, NAME_REGEXP } from '../../utils/constants';
 import './Profile.css';
 
-function Profile({ isLoading, serverErrorText, onUpdateUser, onLogout }) {
+function Profile({ isLoading, serverResponseMessage, isError, onUpdateUser, onLogout }) {
   const user = useContext(CurrentUserContext);
   const [isFormActive, setIsFormActive] = useState(false);
 
@@ -26,8 +26,12 @@ function Profile({ isLoading, serverErrorText, onUpdateUser, onLogout }) {
     e.preventDefault();
 
     onUpdateUser(values);
-    resetForm()
+    resetForm();
   };
+
+  const isNewData = isValid
+  && (values.name !== user?.name
+    || values.email !== user?.email);
 
   useEffect(() => {
     setValues({
@@ -104,12 +108,12 @@ function Profile({ isLoading, serverErrorText, onUpdateUser, onLogout }) {
             </>
           ) : (
             <>
-              <span className='profile__error-message'>
-                {serverErrorText}
+              <span className={`profile__message ${isError && 'profile__message_error'}`}>
+                {serverResponseMessage}
               </span>
               <button
-                className={`profile__submit-btn ${(!isValid || isLoading) && 'profile__submit-btn_disabled'}`}
-                disabled={!isValid || isLoading}
+                className={`profile__submit-btn ${(!isNewData || isLoading) && 'profile__submit-btn_disabled'}`}
+                disabled={!isNewData || isLoading}
                 type='submit'
               >
                 {isLoading ? 'Сохранение...' : 'Сохранить'}
