@@ -23,15 +23,16 @@ function SavedMovies({ savedMovies, onDelete }) {
   };
 
   useEffect(() => {
-    if (!query) {
-      return
+    if (!query && !filterChecked) {
+      setMovies(savedMovies);
+      return;
     }
-    searchSavedMovies(savedMovies, query, filterChecked)
-  }, [savedMovies, query, filterChecked])
+    searchSavedMovies(savedMovies, query, filterChecked);
+  }, [savedMovies, query, filterChecked]);
 
   function handleFilter() {
     setFilterChecked(!filterChecked);
-  }
+  };
 
   return (
     <main className='saved-movies'>
