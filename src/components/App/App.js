@@ -14,7 +14,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { getUserInfo, login, register, updateUserInfo, addMovie, deleteMovie, getSavedMovies, logout } from '../../utils/MainApi';
 import useForm from '../../hooks/useForm';
-import { PROFILE_UPD_ERROR_MESSAGE, PROFILE_UPD_SUCCESS_MESSAGE } from '../../utils/constants';
+import { PROFILE_UPD_ERROR_MESSAGE, PROFILE_UPD_SUCCESS_MESSAGE, UNAUTHORIZED_ERROR } from '../../utils/constants';
 
 function App() {
   const currentPath = useLocation();
@@ -100,6 +100,12 @@ function App() {
         setProfileUpdateMessage(PROFILE_UPD_SUCCESS_MESSAGE);
       })
       .catch(err => {
+        if (err.status === UNAUTHORIZED_ERROR) {
+          setLoggedIn(false);
+          setCurrentUser({});
+          localStorage.clear();
+          history.push('/');
+        }
         console.log(err);
         setIsError(true);
         setProfileUpdateMessage(PROFILE_UPD_ERROR_MESSAGE);
