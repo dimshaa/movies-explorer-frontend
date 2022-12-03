@@ -31,9 +31,15 @@ function App() {
         .then(user => {
           setCurrentUser(user);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setLoggedIn(false);
+          setCurrentUser({});
+          localStorage.clear();
+          history.push('/');
+        })
     }
-  }, [history, loggedIn]);
+  }, [loggedIn, history]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -41,8 +47,15 @@ function App() {
         .then(movies => {
           setSavedMovies(movies);
         })
+        .catch(err => {
+          console.log(err);
+          setLoggedIn(false);
+          setCurrentUser({});
+          localStorage.clear();
+          history.push('/');
+        })
     }
-  }, [loggedIn]);
+  }, [loggedIn, history]);
 
   function handleLogin({ email, password }) {
     setIsLoading(true);
@@ -83,6 +96,10 @@ function App() {
       })
       .catch(err => {
         console.log(err);
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.clear();
+        history.push('/');
       })
       .finally(() => setIsLoading(false));
   };
@@ -103,7 +120,13 @@ function App() {
       .then(addedMovie => {
         setSavedMovies([addedMovie, ...savedMovies]);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.clear();
+        history.push('/');
+      });
   };
 
   function handleDeleteMovie(movieId) {
@@ -111,7 +134,13 @@ function App() {
       .then(() => {
         setSavedMovies((state) => state.filter((m) => m._id !== movieId));
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.clear();
+        history.push('/');
+      });
   };
 
   const headerShown =
