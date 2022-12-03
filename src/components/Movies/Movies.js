@@ -47,10 +47,11 @@ function Movies({ savedMovies, onLike, onDelete }) {
 
   function handleSearch(query) {
     setIsLoading(true);
+    const allMovies = JSON.parse(localStorage.getItem('allMovies'));
 
-    getMovies()
-    .then((movies) => {
-      let foundMovies = findMovies(movies, query);
+    if (allMovies) {
+
+      let foundMovies = findMovies(allMovies, query);
       const currentSearch = {query: query, movies: foundMovies, filterChecked: filterChecked};
 
       if (filterChecked) {
@@ -60,11 +61,27 @@ function Movies({ savedMovies, onLike, onDelete }) {
       setMovies(foundMovies);
       setQuery(query);
       localStorage.setItem('currentSearch', JSON.stringify(currentSearch));
-    })
-    .catch(err => console.log(err))
-    .finally(() => {
-      setIsLoading(false)
-    });
+      setIsLoading(false);
+    } else {
+      getMovies()
+      .then((movies) => {
+        localStorage.setItem('allMovies', JSON.stringify(movies));
+        let foundMovies = findMovies(movies, query);
+        const currentSearch = {query: query, movies: foundMovies, filterChecked: filterChecked};
+
+        if (filterChecked) {
+          foundMovies = filterShortMovies(foundMovies);
+        }
+
+        setMovies(foundMovies);
+        setQuery(query);
+        localStorage.setItem('currentSearch', JSON.stringify(currentSearch));
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        setIsLoading(false)
+      });
+    }
   };
 
   function handleFilter() {
