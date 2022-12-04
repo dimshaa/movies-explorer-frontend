@@ -1,27 +1,35 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
 import logo from '../../images/logo.svg';
+import { EMAIL_REGEXP } from '../../utils/constants';
 import './Login.css';
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isFormValid, setIsFormVAlid] = useState(false);
+function Login({ onLogin, isLoading, serverResponseMessage, isError }) {
+  const {
+    values,
+    handleChange,
+    isValid,
+    isValidInputs,
+    errors,
+  } = useForm();
 
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
+  function handleSubmit(e) {
+    e.preventDefault();
 
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
+    onLogin(values);
+  };
+
 
   return (
     <main className='login'>
       <Link className='logo-link' to='/'>
         <img className='logo' src={logo} alt='логотип' />
       </Link>
-      <form className='login__form'>
+      <form
+        className='login__form'
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <h2 className='login__title'>
           Рады видеть!
         </h2>
@@ -30,36 +38,47 @@ function Login() {
             E&#8209;mail
           </label>
           <input
-            className='login__input'
+            className={`login__input ${!isValidInputs.email && 'login__input_invalid'}`}
             type='text'
             id='email'
             name='email'
             minLength={1}
-            value={email}
-            onChange={handleEmailChange}
+            value={values.email || ''}
+            pattern={EMAIL_REGEXP}
+            onChange={handleChange}
+            disabled={isLoading}
             required
           />
-          <span className='login__error-text'></span>
+          <span className='login__error-text'>
+            {errors.email}
+          </span>
           <label className='login__label' htmlFor='password'>
             Пароль
           </label>
           <input
-            className='login__input'
+            className={`login__input ${!isValidInputs.password && 'login__input_invalid'}`}
             type='password'
             id='password'
             name='password'
             minLength={6}
-            value={password}
-            onChange={handlePasswordChange}
+            value={values.password || ''}
+            onChange={handleChange}
+            disabled={isLoading}
             required
           />
-          <span className='login__error-text'></span>
+          <span className='login__error-text'>
+            {errors.password}
+          </span>
         </fieldset>
+        <span className={`login__message ${isError && 'login__message_error'}`}>
+            {serverResponseMessage}
+          </span>
         <button
-          className={`login__submit-btn ${!isFormValid && 'login__submit-btn_disabled'}`}
+          className={`login__submit-btn ${(!isValid || isLoading) && 'login__submit-btn_disabled'}`}
           type='submit'
+          disabled={!isValid || isLoading}
         >
-          Войти
+          {isLoading ? 'Вход...' : 'Войти'}
         </button>
       </form>
       <span className='login__tooltip'>
