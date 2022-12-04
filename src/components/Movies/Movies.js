@@ -8,6 +8,7 @@ import useWindowWidth from '../../hooks/useWindowWidth';
 import { useLocation } from 'react-router-dom';
 import { filterShortMovies, findMovies } from '../../utils/utils';
 import { LARGE_SCREEN, MEDIUM_SCREEN, OVERALL_SCREEN, SMALL_SCREEN } from '../../utils/constants';
+import NoResult from '../NoResult/NoResult';
 
 function Movies({ savedMovies, onLike, onDelete }) {
   const currentSearch = JSON.parse(localStorage.getItem('currentSearch'));
@@ -122,6 +123,7 @@ function Movies({ savedMovies, onLike, onDelete }) {
   }, []);
 
   const isMoreBtnVisible = (currentPath.pathname === '/movies') && (cards.length !== movies.length);
+  const isNoResult = (currentSearch && !cards.length);
 
   return (
     <main className='movies'>
@@ -136,6 +138,7 @@ function Movies({ savedMovies, onLike, onDelete }) {
         <Preloader />
       ) : (
         <>
+          {isNoResult && <NoResult />}
           <MoviesCardList
             cards={cards}
             savedMovies={savedMovies}

@@ -51,7 +51,7 @@ function MoviesCard({ card, savedMovies, onLike, onDelete }) {
           <button
             className={`card__save-btn ${isSaved && 'card__save-btn_delete'}`}
             type='button'
-            onClick={isSaved && handleDelete}
+            onClick={isSaved ? handleDelete : undefined}
             aria-label='удалить из избранного'
           >
           </button>

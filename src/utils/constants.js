@@ -34,6 +34,7 @@ export const UNAUTHORIZED_ERROR = 401;
 export const CONFLICT_ERROR = 409;
 
 export const SERVER_ERROR_MESSAGE = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+export const NOTHING_FOUND_MESSAGE = 'Ничего не найдено.'
 
 export const UNAUTHORIZED_ERROR_MESSAGE = 'Вы ввели неправильный логин или пароль.';
 export const VALIDATION_ERROR_MESSAGE = 'Вы ввели некорректные данные.';
