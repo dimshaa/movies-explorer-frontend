@@ -1,5 +1,13 @@
 # movies-explorer-frontend
 
+IP 178.154.231.121
+
+[Ссылка на pull request](https://github.com/dimshaa/movies-explorer-frontend/pull/7)
+
+[Ссылка на frontend](https://mydiploma.nomoredomains.icu/)
+
+[Ссылка на backend](https://api.mydiploma.nomoredomains.icu/)
+
 [Ссылка на макет](https://disk.yandex.ru/d/VPjg112lNweW1A)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
